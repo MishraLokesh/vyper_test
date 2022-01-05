@@ -3,17 +3,11 @@ const { ethers } = require("hardhat");
 
 describe("Greeter", function () {
   it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy();
+    const Greeter = await ethers.getContractFactory("Vyper_test");
+    const greeter = await Greeter.deploy("hello");
     await greeter.deployed();
 
-    expect(await greeter.greet()).to.equal("Hello, world!");
+    expect(await greeter.getUserName()).to.equal("Lokesh__");
 
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
-
-    // wait until the transaction is mined
-    await setGreetingTx.wait();
-
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
   });
 });
